@@ -78,6 +78,14 @@ Deno.test("submit an answer", async () => {
   });
 });
 
+Deno.test("submit answer with bad body", async () => {
+  const request = await superoak(app);
+
+  await request.patch("/cards/2").send({
+    "garbage": "data",
+  }).expect(400);
+});
+
 Deno.test("submit an answer with wrong answer", async () => {
   const request = await superoak(app);
 
