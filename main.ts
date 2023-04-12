@@ -1,5 +1,5 @@
-import { app } from "./app.ts";
+import { getApp } from "./app.ts";
 
 const port = 8000;
 console.log(`Server running on port ${port}`);
-await app.listen({ port });
+await getApp().listen({ port });

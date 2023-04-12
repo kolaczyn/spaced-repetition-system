@@ -1,13 +1,13 @@
 import { Card } from "./card_db.ts";
 import { ONE_DAY } from "./constants.ts";
 
-const NOW = 1681329989583;
+export const NOW = 1681329989583;
 
 export const cardOne = {
   id: 1,
   question: "What is the capital of France?",
   answer: "Paris",
-  whenReview: NOW,
+  whenReview: NOW - ONE_DAY * 2,
   currentFib: 3,
 };
 
