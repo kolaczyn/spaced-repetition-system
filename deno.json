@@ -3,8 +3,8 @@
     "run": "deno run --allow-net ./src/main.ts",
     "test": "deno test --ignore=integration",
     "test:integration": "deno test --allow-net ./integration",
-    "compile": "deno compile --allow-net main.ts --output bin/main",
+    "compile": "deno compile --allow-net ./src/main.ts --output bin/main",
     "format": "deno fmt --check",
-    "ci": "deno task test && deno task test:integration && deno task format"
+    "ci": "deno task test && deno task test:integration && deno task format && deno task compile"
   }
 }

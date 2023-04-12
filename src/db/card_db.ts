@@ -1,4 +1,4 @@
-import { getWhenToReview } from "./get_when_to_review.ts";
+import { getWhenToReview } from "../domain/get_when_to_review.ts";
 
 export type Card = {
   id: number;

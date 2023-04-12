@@ -1,5 +1,5 @@
-import { Card } from "./card_db.ts";
-import { ONE_DAY } from "./constants.ts";
+import { Card } from "../src/db/card_db.ts";
+import { ONE_DAY } from "../src/constants.ts";
 
 export const NOW = 1681329989583;
 

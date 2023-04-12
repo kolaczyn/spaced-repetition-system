@@ -1,9 +1,8 @@
 import { Application, Router } from "https://deno.land/x/oak@v12.1.0/mod.ts";
-import { CardDb } from "./card_db.ts";
-import { initialCards } from "./mockCards.ts";
+import { CardDb } from "./db/card_db.ts";
 
 export const getApp = (getNow = Date.now) => {
-  const cardDb = new CardDb(initialCards, getNow);
+  const cardDb = new CardDb([], getNow);
 
   const router = new Router();
 

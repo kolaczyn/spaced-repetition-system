@@ -1,5 +1,5 @@
 import { superoak } from "https://deno.land/x/superoak@4.7.0/mod.ts";
-import { cardOne, cardTwo, initialCards, NOW } from "../src/mockCards.ts";
+import { cardOne, cardTwo, initialCards, NOW } from "./mock_cards.ts";
 import { getApp } from "../src/app.ts";
 
 const app = getApp(() => NOW);

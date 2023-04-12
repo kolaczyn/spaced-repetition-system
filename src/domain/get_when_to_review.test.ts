@@ -1,6 +1,6 @@
 import { assertEquals } from "https://deno.land/std@0.183.0/testing/asserts.ts";
 import { getWhenToReview } from "./get_when_to_review.ts";
-import { ONE_DAY } from "./constants.ts";
+import { ONE_DAY } from "../constants.ts";
 
 Deno.test("review in 24 hours if answer incorrect", () => {
   assertEquals(
