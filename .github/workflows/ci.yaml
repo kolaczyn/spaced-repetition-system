@@ -18,10 +18,10 @@ jobs:
         uses: denoland/setup-deno@v1
 
       - name: Compile
-        run: deno compile --allow-net main.ts --output bin/main
+        run: deno task compile
 
       - name: Format
-        run: deno fmt --check
+        run: deno task format
 
       - name: Tests
-        run: deno test
+        run: deno task test
