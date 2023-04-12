@@ -23,5 +23,8 @@ jobs:
       - name: Format
         run: deno task format
 
-      - name: Tests
+      - name: Unit Tests
         run: deno task test
+
+      - name: Integration Tests
+        run: deno task test:integration

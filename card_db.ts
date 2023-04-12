@@ -1,7 +1,6 @@
-import { ONE_DAY } from "./constants.ts";
 import { getWhenToReview } from "./get_when_to_review.ts";
 
-type Card = {
+export type Card = {
   id: number;
   question: string;
   answer: string;
@@ -9,10 +8,14 @@ type Card = {
   currentFib: number;
 };
 
-class CardDb {
+export class CardDb {
   #cards: Card[] = [];
 
-  constructor(cards: Card[]) {
+  constructor(cards: Card[], private getNow = Date.now) {
+    this.#cards = cards;
+  }
+
+  importData(cards: Card[]) {
     this.#cards = cards;
   }
 
@@ -29,7 +32,7 @@ class CardDb {
   }
 
   getCardsToReview(): Omit<Card, "answer">[] {
-    const now = Date.now();
+    const now = this.getNow();
     return (
       this.#cards
         .filter((card) => card.whenReview < now)
@@ -58,7 +61,7 @@ class CardDb {
     const { nextFib, whenReview } = getWhenToReview({
       isAnswerCorrect,
       currentFib: card.currentFib,
-      now: Date.now(),
+      now: this.getNow(),
     });
     const newCard: Card = {
       ...card,
@@ -69,29 +72,3 @@ class CardDb {
     return this.getCard(id);
   }
 }
-
-const initialCards: Card[] = [
-  {
-    id: 1,
-    question: "What is the capital of France?",
-    answer: "Paris",
-    whenReview: Date.now(),
-    currentFib: 3,
-  },
-  {
-    id: 2,
-    question: "What is the capital of Germany?",
-    answer: "Berlin",
-    whenReview: Date.now() - ONE_DAY,
-    currentFib: 5,
-  },
-  {
-    id: 3,
-    question: "What is the capital of Italy?",
-    answer: "Rome",
-    whenReview: Date.now() + ONE_DAY * 2,
-    currentFib: 8,
-  },
-];
-
-export const cardDb = new CardDb(initialCards);

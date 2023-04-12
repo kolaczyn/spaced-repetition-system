@@ -1,7 +1,8 @@
 {
   "tasks": {
     "run": "deno run --allow-net main.ts",
-    "test": "deno test",
+    "test": "deno test --ignore=integration_tests",
+    "test:integration": "deno test --allow-net ./integration_tests",
     "compile": "deno compile --allow-net main.ts --output bin/main",
     "format": "deno fmt --check"
   }
