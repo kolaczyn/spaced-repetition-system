@@ -1,6 +1,6 @@
 import { superoak } from "https://deno.land/x/superoak@4.7.0/mod.ts";
-import { cardOne, cardTwo, initialCards, NOW } from "../mockCards.ts";
-import { getApp } from "../app.ts";
+import { cardOne, cardTwo, initialCards, NOW } from "../src/mockCards.ts";
+import { getApp } from "../src/app.ts";
 
 const app = getApp(() => NOW);
 
