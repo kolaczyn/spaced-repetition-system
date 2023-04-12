@@ -1,0 +1,7 @@
+POST http://localhost:8000/cards/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "answer": "Paris"
+}
