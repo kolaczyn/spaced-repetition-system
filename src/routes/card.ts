@@ -1,8 +1,8 @@
 import { Router } from "https://deno.land/x/oak@v12.1.0/mod.ts";
-import { CardDb } from "../db/card_db.ts";
+import { CardDbClient } from "../db/card_db.ts";
 import { patchCardValidation } from "../validation/patch_card.ts";
 
-export const cardRoute = (cardDb: CardDb) => {
+export const cardRoute = (cardDb: CardDbClient) => {
   const router = new Router();
 
   router.put("/", async (ctx) => {

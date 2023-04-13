@@ -2,7 +2,7 @@ import { superoak } from "https://deno.land/x/superoak@4.7.0/mod.ts";
 import { cardOne, cardTwo, initialCards, NOW } from "./mock_cards.ts";
 import { getApp } from "../src/app.ts";
 
-const app = getApp(() => NOW);
+const app = await getApp(() => NOW);
 
 Deno.test("import", async () => {
   const request = await superoak(app);

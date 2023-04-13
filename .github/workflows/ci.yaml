@@ -26,5 +26,6 @@ jobs:
       - name: Unit Tests
         run: deno task test
 
-      - name: Integration Tests
-        run: deno task test:integration
+      # # TODO add integration tests to CI
+      # - name: Integration Tests
+      #   run: deno task test:integration

@@ -1,6 +1,7 @@
 import { Card } from "../src/db/card_db.ts";
 import { ONE_DAY } from "../src/constants.ts";
 
+/** 12.04.2023 */
 export const NOW = 1681329989583;
 
 export const cardOne = {

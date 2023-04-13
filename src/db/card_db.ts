@@ -8,7 +8,7 @@ export type Card = {
   currentFib: number;
 };
 
-export class CardDb {
+export class CardDbClient {
   #cards: Card[] = [];
 
   constructor(cards: Card[], private getNow = Date.now) {
@@ -21,10 +21,6 @@ export class CardDb {
 
   addCard(card: Card) {
     this.#cards.push(card);
-  }
-
-  addCardList(card: Card[]) {
-    this.#cards.push(...card);
   }
 
   getCard(id: number): Card | null {
