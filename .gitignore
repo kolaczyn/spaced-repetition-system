@@ -1,2 +1,5 @@
 bin/
 .DS_STORE
+coverage.lcov
+/coverage_data/
+/coverage-report/

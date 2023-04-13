@@ -19,10 +19,6 @@ export class CardDbClient {
     this.#cards = cards;
   }
 
-  addCard(card: Card) {
-    this.#cards.push(card);
-  }
-
   getCard(id: number): Card | null {
     return this.#cards.find((card) => card.id === id) ?? null;
   }
