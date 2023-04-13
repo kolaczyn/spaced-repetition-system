@@ -1,0 +1,32 @@
+version: '3.9'
+
+services:
+  deno:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: bash -c "nessie migrate && deno task integration"
+    volumes:
+      - .:/app
+      - deno_cache:/root/.cache/deno
+    depends_on:
+      - db
+    environment:
+      POSTGRES_HOSTNAME: db
+      POSTGRES_USER: postgres
+      POSTGRES_DATABASE: test_db
+      POSTGRES_PASSWORD: example_password
+      PGPORT: 5432
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: example_password
+      POSTGRES_DB: test_db
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
+  deno_cache:

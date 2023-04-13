@@ -14,6 +14,7 @@ export const getClient = async () => {
   const client = new Client({
     database: Deno.env.get("POSTGRES_DATABASE"),
     hostname: Deno.env.get("POSTGRES_HOSTNAME"),
+    password: Deno.env.get("POSTGRES_PASSWORD"),
     port: Deno.env.get("POSTGRES_PORT"),
     user: Deno.env.get("POSTGRES_USER"),
   });

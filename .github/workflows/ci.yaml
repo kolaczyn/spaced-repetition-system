@@ -7,6 +7,7 @@ on:
   push:
     branches:
       - main
+
 jobs:
   linter:
     runs-on: ubuntu-latest
@@ -25,7 +26,3 @@ jobs:
 
       - name: Unit Tests
         run: deno task test
-
-      # # TODO add integration tests to CI
-      # - name: Integration Tests
-      #   run: deno task integration
