@@ -14,7 +14,9 @@ export const answerCard = (
 ): CardDomain => {
   const isCorrect = getIsAnswerCorrect({ card, answer });
   const nextFib = isCorrect ? getNextFib(card.currentFib) : 1;
-  const whenNextReview = isCorrect ? getNow() + nextFib * ONE_DAY : getNow();
+  const whenNextReview = isCorrect
+    ? getNow() + card.currentFib * ONE_DAY
+    : getNow();
   return {
     ...card,
     currentFib: nextFib,

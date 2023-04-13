@@ -22,8 +22,20 @@ Deno.test("Spaced Repetition System", () => {
     }),
     id: 1,
   };
+  // 0
   assertEquals(isCardActive({ card, getNow }), true);
 
+  // 1
+  card = answerCard({
+    card,
+    answer: correctAnswer,
+    getNow,
+  });
+  assertEquals(isCardActive({ card, getNow }), false);
+  passDay();
+  assertEquals(isCardActive({ card, getNow }), true);
+
+  // 2
   card = answerCard({
     card,
     answer: correctAnswer,
@@ -32,7 +44,7 @@ Deno.test("Spaced Repetition System", () => {
   assertEquals(isCardActive({ card, getNow }), false);
   passDay();
   assertEquals(isCardActive({ card, getNow }), false);
-  passDay(); // 2 days
+  passDay();
   assertEquals(isCardActive({ card, getNow }), true);
 
   card = answerCard({
@@ -40,14 +52,8 @@ Deno.test("Spaced Repetition System", () => {
     answer: correctAnswer,
     getNow,
   });
-  assertEquals(isCardActive({ card, getNow }), false);
-  passDay();
-  assertEquals(isCardActive({ card, getNow }), false);
-  passDay();
-  assertEquals(isCardActive({ card, getNow }), false);
-  passDay(); // 5 days
-  assertEquals(isCardActive({ card, getNow }), true);
 
+  // 3
   card = answerCard({
     card,
     answer: wrongAnswer,
@@ -55,7 +61,9 @@ Deno.test("Spaced Repetition System", () => {
   });
   assertEquals(isCardActive({ card, getNow }), true);
   passDay();
+  assertEquals(isCardActive({ card, getNow }), true);
   passDay();
+  assertEquals(isCardActive({ card, getNow }), true);
   passDay();
   assertEquals(isCardActive({ card, getNow }), true);
 
@@ -64,8 +72,6 @@ Deno.test("Spaced Repetition System", () => {
     answer: correctAnswer,
     getNow,
   });
-  assertEquals(isCardActive({ card, getNow }), false);
-  passDay();
   assertEquals(isCardActive({ card, getNow }), false);
   passDay();
   assertEquals(isCardActive({ card, getNow }), true);

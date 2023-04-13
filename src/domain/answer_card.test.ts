@@ -27,8 +27,7 @@ Deno.test("correct answer of a new card", () => {
   const expected = {
     question: "question",
     answer: correct,
-    // TODO I should make this 1 * ONE_DAY
-    whenReview: 2 * ONE_DAY,
+    whenReview: 1 * ONE_DAY,
     currentFib: 2,
     id: 1,
   };
@@ -51,7 +50,7 @@ Deno.test("correct answer of an old card", () => {
   const expected = {
     question: "question",
     answer: correct,
-    whenReview: 13 * ONE_DAY,
+    whenReview: 8 * ONE_DAY,
     currentFib: 13,
     id: 1,
   };
@@ -74,7 +73,6 @@ Deno.test("incorrect answer of an old card", () => {
   const expected = {
     question: "question",
     answer: correct,
-    // TODO should make this 1 * ONE_DAY
     whenReview: NOW,
     currentFib: 1,
     id: 1,
