@@ -1,5 +1,5 @@
 import { ONE_DAY } from "../constants.ts";
-import { getNextFib } from "../fib/fib.ts";
+import { getNextFib } from "./fib.ts";
 import { getIsAnswerCorrect } from "./get_is_answer_correct.ts";
 import { CardDomain } from "./types.ts";
 

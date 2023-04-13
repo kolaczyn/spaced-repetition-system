@@ -1,6 +1,6 @@
+import z from "https://deno.land/x/zod@v3.21.4/index.ts";
 import { Router } from "https://deno.land/x/oak@v12.1.0/mod.ts";
 import { CardDbClient } from "../db/card_db.ts";
-import { patchCardValidation } from "../validation/patch_card.ts";
 
 export const cardRoute = (cardDb: CardDbClient) => {
   const router = new Router();
@@ -38,10 +38,15 @@ export const cardRoute = (cardDb: CardDbClient) => {
 
   router.patch("/:id", async (ctx) => {
     const body = await ctx.request.body().value;
-    const result = patchCardValidation.safeParse({
-      id: ctx.params.id,
-      answer: body.answer,
-    });
+
+    const result = z.object({
+      id: z.coerce.number(),
+      answer: z.string(),
+    })
+      .safeParse({
+        id: ctx.params.id,
+        answer: body.answer,
+      });
     if (!result.success) {
       ctx.response.status = 400;
       ctx.response.body = result.error;

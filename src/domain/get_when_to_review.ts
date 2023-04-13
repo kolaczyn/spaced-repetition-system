@@ -1,5 +1,5 @@
 import { ONE_DAY } from "../constants.ts";
-import { getNextFib } from "../fib/fib.ts";
+import { getNextFib } from "./fib.ts";
 
 type Args = {
   isAnswerCorrect: boolean;
