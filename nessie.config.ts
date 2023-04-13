@@ -2,13 +2,13 @@ import {
   ClientPostgreSQL,
   NessieConfig,
 } from "https://deno.land/x/nessie@2.0.10/mod.ts";
+import "https://deno.land/std@0.182.0/dotenv/load.ts";
 
 const client = new ClientPostgreSQL({
-  // TODO read from env
-  database: "postgres",
-  hostname: "localhost",
-  port: 5432,
-  user: "kolaczyn",
+  database: Deno.env.get("POSTGRES_DATABASE"),
+  hostname: Deno.env.get("POSTGRES_HOSTNAME"),
+  port: Deno.env.get("POSTGRES_PORT"),
+  user: Deno.env.get("POSTGRES_USER"),
 });
 
 const config: NessieConfig = {

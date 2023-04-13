@@ -28,4 +28,4 @@ jobs:
 
       # # TODO add integration tests to CI
       # - name: Integration Tests
-      #   run: deno task test:integration
+      #   run: deno task integration

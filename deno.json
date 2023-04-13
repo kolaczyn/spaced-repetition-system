@@ -1,11 +1,10 @@
 {
   "tasks": {
-    "run": "deno run --allow-net --allow-env ./src/main.ts",
+    "run": "deno run --allow-net --allow-env --allow-read ./src/main.ts",
     "test": "deno test ./src",
-    "test:integration": "deno test --allow-net ./integration",
-    "test:all": "deno test --allow-net ./src ./integration",
+    "integration": "deno test --allow-net --allow-read --allow-env ./integration",
     "compile": "deno compile --allow-net ./src/main.ts --output bin/main",
     "format": "deno fmt --check",
-    "ci": "deno task test && deno task test:integration && deno task format && deno task compile"
+    "ci": "deno task test && deno task integration && deno task format && deno task compile"
   }
 }

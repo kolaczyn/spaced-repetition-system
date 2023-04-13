@@ -1,5 +1,12 @@
 ## Setup
 
+### Setup environment
+
+Install `deno` and `postgres` on your system.\
+Change `.env` file depending on your Postgres setup
+
+### Migration
+
 Install tool for migration
 
 ```sh
@@ -10,6 +17,12 @@ Run migrations
 
 ```sh
 nessie migrate
+```
+
+### Run
+
+```sh
+deno task run
 ```
 
 ### Code Coverage

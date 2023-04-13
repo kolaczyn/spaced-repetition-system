@@ -12,11 +12,10 @@ export type DbClient = Awaited<ReturnType<typeof getClient>>;
 
 export const getClient = async () => {
   const client = new Client({
-    // TODO read from env
-    database: "postgres",
-    hostname: "localhost",
-    port: 5432,
-    user: "kolaczyn",
+    database: Deno.env.get("POSTGRES_DATABASE"),
+    hostname: Deno.env.get("POSTGRES_HOSTNAME"),
+    port: Deno.env.get("POSTGRES_PORT"),
+    user: Deno.env.get("POSTGRES_USER"),
   });
   await client.connect();
 
