@@ -1,6 +1,7 @@
 import { Router } from "https://deno.land/x/oak@v12.1.0/mod.ts";
 import { DbClient } from "../db/card_postgres.db.ts";
 import z from "https://deno.land/x/zod@v3.21.4/index.ts";
+import { Status } from "https://deno.land/std@0.178.0/http/http_status.ts";
 
 export const cardV2Route = (
   dbClient: DbClient,
@@ -31,22 +32,22 @@ export const cardV2Route = (
       return;
     }
 
-    const lol = {
-      answer: result.data.answer,
-      currentFib: 0,
-      question: result.data.question,
-      whenReview: getNow(),
-    };
-    const insertResult = await dbClient.insert(lol);
+    const insertResult = await dbClient.insert(
+      {
+        answer: result.data.answer,
+        currentFib: 0,
+        question: result.data.question,
+        whenReview: getNow(),
+      },
+    );
     const createdCard = insertResult.rows[0];
-    ctx.response.status = 201;
+    ctx.response.status = Status.Created;
     ctx.response.body = createdCard;
   });
 
   router.get("/", async (ctx) => {
     const result = await dbClient.getById(1);
     const foundCard = result.rows[0];
-    console.log(foundCard);
     ctx.response.body = foundCard;
   });
 
