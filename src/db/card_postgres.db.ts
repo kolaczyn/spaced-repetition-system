@@ -47,17 +47,7 @@ export const getClient = async () => {
     );
     return result;
   };
-
-  const getById = async (id: number) => {
-    const result = await client.queryObject<CardDb>(
-      "SELECT id, question, answer, when_review, current_fib FROM cards WHERE id = $1",
-      [id],
-    );
-    return result;
-  };
-
   return {
-    getById,
     insert,
     trunkate,
   };

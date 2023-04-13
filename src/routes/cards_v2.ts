@@ -45,11 +45,5 @@ export const cardV2Route = (
     ctx.response.body = createdCard;
   });
 
-  router.get("/", async (ctx) => {
-    const result = await dbClient.getById(1);
-    const foundCard = result.rows[0];
-    ctx.response.body = foundCard;
-  });
-
   return router;
 };
