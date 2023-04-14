@@ -6,5 +6,5 @@ const app = await getApp();
 
 Deno.test("ping pong", async () => {
   const request = await superoak(app);
-  await request.get("/ping").expect(200).expect("Pong");
+  await request.get("/v1/ping").expect(200).expect("Pong");
 });

@@ -3,7 +3,7 @@ import { DbClient } from "../db/card_postgres.db.ts";
 import z from "https://deno.land/x/zod@v3.21.4/index.ts";
 import { Status } from "https://deno.land/std@0.178.0/http/http_status.ts";
 
-export const cardV2Route = (
+export const cardsRoute = (
   dbClient: DbClient,
   getNow: () => number,
 ) => {
