@@ -6,9 +6,13 @@ export const timeSimulation = () => {
     currentTime += ONE_DAY;
   };
   const getNow = () => currentTime;
+  const reset = () => {
+    currentTime = 0;
+  };
 
   return {
     passDay,
     getNow,
+    reset,
   };
 };

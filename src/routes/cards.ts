@@ -2,6 +2,8 @@ import { Router } from "https://deno.land/x/oak@v12.1.0/mod.ts";
 import { DbClient } from "../db/card_postgres.db.ts";
 import z from "https://deno.land/x/zod@v3.21.4/index.ts";
 import { Status } from "https://deno.land/std@0.178.0/http/http_status.ts";
+import { CardDomain } from "../domain/types.ts";
+import { answerCard } from "../domain/answer_card.ts";
 
 export const cardsRoute = (
   dbClient: DbClient,
@@ -14,6 +16,41 @@ export const cardsRoute = (
     ctx.response.body = {
       message: "Deleted all cards",
     };
+  });
+
+  router.patch("/:id", async (ctx) => {
+    const body = await ctx.request.body().value;
+    const result = z.object({
+      id: z.coerce.number(),
+      answer: z.string(),
+    }).safeParse({
+      id: ctx.params.id,
+      answer: body.answer,
+    });
+    if (!result.success) {
+      ctx.response.status = Status.BadRequest;
+      ctx.response.body = result.error;
+      return;
+    }
+    const { answer, id } = result.data;
+    const card = await dbClient.select(id);
+    if (card.rows.length === 0) {
+      ctx.response.status = Status.NotFound;
+      return;
+    }
+    const cardDomain: CardDomain = {
+      ...card.rows[0],
+    };
+
+    const newCard = answerCard({
+      answer,
+      card: cardDomain,
+      getNow,
+    });
+
+    const updateResult = await dbClient.update(newCard);
+    ctx.response.status = Status.OK;
+    ctx.response.body = updateResult.rows[0];
   });
 
   router.post("/", async (ctx) => {

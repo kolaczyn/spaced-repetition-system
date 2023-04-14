@@ -9,6 +9,7 @@ export const getApp = async (getNow = Date.now) => {
   const router = new Router();
 
   router.use("/v1/ping", pingRoute().routes());
+  // TODO make this v1
   router.use("/v2/cards", cardsRoute(dbClient, getNow).routes());
 
   return new Application().use(router.routes()).use(router.allowedMethods());

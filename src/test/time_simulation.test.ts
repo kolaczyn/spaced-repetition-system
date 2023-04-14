@@ -15,8 +15,8 @@ Deno.test("passing a day", () => {
   assertEquals(getNow(), ONE_DAY);
 });
 
-Deno.test("passing a week", () => {
-  const { getNow, passDay } = timeSimulation();
+Deno.test("passing a week and resetting", () => {
+  const { getNow, passDay, reset } = timeSimulation();
 
   passDay();
   passDay();
@@ -27,4 +27,7 @@ Deno.test("passing a week", () => {
   passDay();
 
   assertEquals(getNow(), 7 * ONE_DAY);
+
+  reset();
+  assertEquals(getNow(), 0);
 });

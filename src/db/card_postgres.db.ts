@@ -33,6 +33,30 @@ export const getClient = async ({ getNow = Date.now }: Args) => {
     return result;
   };
 
+  const update = async (card: CardDb) => {
+    const result = await client.queryObject<
+      CardDb
+    >(
+      {
+        text: `
+      UPDATE cards
+      SET question = $1, answer = $2, when_review = $3, current_fib = $4
+      WHERE id = $5
+      RETURNING id, question, answer, when_review, current_fib
+      `,
+        camelcase: true,
+        args: [
+          card.question,
+          card.answer,
+          card.whenReview,
+          card.currentFib,
+          card.id,
+        ],
+      },
+    );
+    return result;
+  };
+
   const insert = async (card: Omit<CardDb, "id">) => {
     const result = await client.queryObject<
       CardDb
@@ -54,12 +78,16 @@ export const getClient = async ({ getNow = Date.now }: Args) => {
 
   const select = async (id: number) => {
     const result = await client.queryObject<CardDb>(
-      `
+      {
+        text: `
       SELECT id, question, answer, when_review, current_fib
       FROM cards
       WHERE id = $1
       `,
-      [id],
+        // TODO convert all the other queries to use this
+        camelcase: true,
+        args: [id],
+      },
     );
     return result;
   };
@@ -88,5 +116,6 @@ export const getClient = async ({ getNow = Date.now }: Args) => {
     select,
     getActiveCards,
     getAllCards,
+    update,
   };
 };
