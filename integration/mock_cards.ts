@@ -11,7 +11,7 @@ export type Card = {
 /** 12.04.2023 */
 export const NOW = 1681329989583;
 
-export const cardOne = {
+export const cardOne: Card = {
   id: 1,
   question: "What is the capital of France?",
   answer: "Paris",
@@ -19,7 +19,7 @@ export const cardOne = {
   currentFib: 3,
 };
 
-export const cardTwo = {
+export const cardTwo: Card = {
   id: 2,
   question: "What is the capital of Germany?",
   answer: "Berlin",
@@ -27,16 +27,10 @@ export const cardTwo = {
   currentFib: 5,
 };
 
-export const cardThree = {
+export const cardThree: Card = {
   id: 3,
   question: "What is the capital of Italy?",
   answer: "Rome",
   whenReview: NOW + ONE_DAY * 2,
   currentFib: 8,
 };
-
-export const initialCards: Card[] = [
-  cardOne,
-  cardTwo,
-  cardThree,
-];

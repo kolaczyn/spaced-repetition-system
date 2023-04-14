@@ -10,7 +10,11 @@ type CardDb = {
 
 export type DbClient = Awaited<ReturnType<typeof getClient>>;
 
-export const getClient = async () => {
+type Args = {
+  getNow?: () => number;
+};
+
+export const getClient = async ({ getNow = Date.now }: Args) => {
   const client = new Client({
     database: Deno.env.get("POSTGRES_DATABASE"),
     hostname: Deno.env.get("POSTGRES_HOSTNAME"),
@@ -47,8 +51,42 @@ export const getClient = async () => {
     );
     return result;
   };
+
+  const select = async (id: number) => {
+    const result = await client.queryObject<CardDb>(
+      `
+      SELECT id, question, answer, when_review, current_fib
+      FROM cards
+      WHERE id = $1
+      `,
+      [id],
+    );
+    return result;
+  };
+
+  const getActiveCards = () =>
+    client.queryObject<CardDb>(
+      `
+      SELECT id, question, answer, when_review, current_fib
+      FROM cards
+      WHERE when_review <= $1
+      `,
+      [getNow()],
+    );
+
+  const getAllCards = () =>
+    client.queryObject<CardDb>(
+      `
+      SELECT id, question, answer, when_review, current_fib
+      FROM cards
+      `,
+    );
+
   return {
     insert,
     trunkate,
+    select,
+    getActiveCards,
+    getAllCards,
   };
 };

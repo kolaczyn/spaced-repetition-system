@@ -2,14 +2,10 @@ import { assertEquals } from "https://deno.land/std@0.129.0/testing/asserts.ts";
 import { createCard } from "./create_card.ts";
 import { isCardActive } from "./is_card_active.ts";
 import { answerCard } from "./answer_card.ts";
-import { ONE_DAY } from "../constants.ts";
+import { timeSimulation } from "../test/time_simulation.ts";
 
 Deno.test("Spaced Repetition System", () => {
-  let currentTime = 0;
-  const passDay = () => {
-    currentTime += ONE_DAY;
-  };
-  const getNow = () => currentTime;
+  const { getNow, passDay } = timeSimulation();
 
   const correctAnswer = "correct";
   const wrongAnswer = "wrong";

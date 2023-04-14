@@ -45,5 +45,33 @@ export const cardsRoute = (
     ctx.response.body = createdCard;
   });
 
+  router.get("/:id", async (ctx) => {
+    const result = z.coerce.number().safeParse(ctx.params.id);
+    if (!result.success) {
+      ctx.response.status = Status.BadRequest;
+      ctx.response.body = result.error;
+      return;
+    }
+
+    const id = result.data;
+    const card = await dbClient.select(id);
+    if (card.rows.length === 0) {
+      ctx.response.status = Status.NotFound;
+      return;
+    }
+    ctx.response.body = card.rows[0];
+  });
+
+  router.get("/", async (ctx) => {
+    const active = ctx.request.url.searchParams.get("active") !== null;
+    if (active) {
+      const cards = await dbClient.getActiveCards();
+      ctx.response.body = cards.rows;
+      return;
+    }
+    const cards = await dbClient.getAllCards();
+    ctx.response.body = cards.rows;
+  });
+
   return router;
 };

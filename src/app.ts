@@ -5,7 +5,7 @@ import { getClient } from "./db/card_postgres.db.ts";
 import "./monkey_patch.ts";
 
 export const getApp = async (getNow = Date.now) => {
-  const dbClient = await getClient();
+  const dbClient = await getClient({});
   const router = new Router();
 
   router.use("/v1/ping", pingRoute().routes());
