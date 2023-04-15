@@ -1,4 +1,4 @@
-import "https://deno.land/std@0.182.0/dotenv/load.ts";
+import "std/dotenv/load.ts";
 import { getApp } from "./app.ts";
 
 const port = Number(Deno.env.get("PORT")) || 8000;

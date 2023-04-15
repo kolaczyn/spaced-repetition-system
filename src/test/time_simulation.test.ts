@@ -1,4 +1,4 @@
-import { assertEquals } from "https://deno.land/std@0.160.0/testing/asserts.ts";
+import { assertEquals } from "std/testing/asserts.ts";
 import { timeSimulation } from "./time_simulation.ts";
 import { ONE_DAY } from "../constants.ts";
 

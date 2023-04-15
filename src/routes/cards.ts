@@ -1,7 +1,7 @@
-import { Router } from "https://deno.land/x/oak@v12.1.0/mod.ts";
+import { Router } from "oak/mod.ts";
 import { DbClient } from "../db/card_postgres.db.ts";
-import z from "https://deno.land/x/zod@v3.21.4/index.ts";
-import { Status } from "https://deno.land/std@0.178.0/http/http_status.ts";
+import z from "zod";
+import { Status } from "std/http/http_status.ts";
 import { CardDomain } from "../domain/types.ts";
 import { answerCard } from "../domain/answer_card.ts";
 

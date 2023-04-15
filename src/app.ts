@@ -1,5 +1,5 @@
-import { Application, Router } from "https://deno.land/x/oak@v12.1.0/mod.ts";
-import { oakCors } from "https://deno.land/x/cors@v1.2.2/mod.ts";
+import { Application, Router } from "oak/mod.ts";
+import { oakCors } from "cors/mod.ts";
 import { pingRoute } from "./routes/ping.ts";
 import { cardsRoute } from "./routes/cards.ts";
 import { getClient } from "./db/card_postgres.db.ts";

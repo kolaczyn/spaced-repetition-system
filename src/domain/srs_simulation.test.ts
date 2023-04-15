@@ -1,4 +1,4 @@
-import { assertEquals } from "https://deno.land/std@0.129.0/testing/asserts.ts";
+import { assertEquals } from "std/testing/asserts.ts";
 import { createCard } from "./create_card.ts";
 import { isCardActive } from "./is_card_active.ts";
 import { answerCard } from "./answer_card.ts";

@@ -1,10 +1,10 @@
-import "https://deno.land/std@0.182.0/dotenv/load.ts";
-import { superoak } from "https://deno.land/x/superoak@4.7.0/src/superoak.ts";
+import "std/dotenv/load.ts";
+import { superoak } from "superoak/mod.ts";
 import { getApp } from "../src/app.ts";
-import { Card, cardOne, cardThree, cardTwo, NOW } from "./mock_cards.ts";
+import { Card, cardOne, cardThree, cardTwo } from "./mock_cards.ts";
 import { timeSimulation } from "../src/test/time_simulation.ts";
-import { assertEquals } from "https://deno.land/std@0.160.0/testing/asserts.ts";
-import { beforeEach, it } from "https://deno.land/std@0.155.0/testing/bdd.ts";
+import { assertEquals } from "std/testing/asserts.ts";
+import { beforeEach, it } from "std/testing/bdd.ts";
 
 const deleteCards = async () => {
   const request = await superoak(app);

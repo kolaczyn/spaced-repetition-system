@@ -5,7 +5,8 @@
     "integration": "deno test --allow-net --allow-read --allow-env ./integration",
     "test-all": "deno test --allow-net --allow-read --allow-env ./src ./integration",
     "compile": "deno compile --allow-net ./src/main.ts --output bin/main",
-    "format": "deno fmt --check",
+    "format": "deno fmt --check ./src",
     "ci": "deno task test && deno task integration && deno task format && deno task compile"
-  }
+  },
+  "importMap": "import_map.json"
 }
