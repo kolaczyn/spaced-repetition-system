@@ -15,7 +15,7 @@ Deno.test("It should add CORS headers to the response", async () => {
   await request.get("/v1/ping").expect(200).expect((x) => {
     assertEquals(
       x.headers["access-control-allow-origin"],
-      "http://localhost:4200",
+      "*",
     );
   });
 });

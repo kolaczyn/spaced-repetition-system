@@ -14,7 +14,7 @@ export const getApp = async (getNow = Date.now) => {
   router.use("/v2/cards", cardsRoute(dbClient, getNow).routes());
 
   return new Application().use(oakCors({
-    origin: "http://localhost:4200",
+    origin: "*",
   })).use(
     router.routes(),
   ).use(router.allowedMethods());
