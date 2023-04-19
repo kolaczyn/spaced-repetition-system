@@ -4,6 +4,9 @@ import z from "zod";
 import { Status } from "std/http/http_status.ts";
 import { CardDomain } from "../domain/types.ts";
 import { answerCard } from "../domain/answer_card.ts";
+import { CardDto } from "./dto.ts";
+import { dbToDto } from "../mappers/db_to_dto.ts";
+import { CardDb } from "../db/card_db.ts";
 
 export const cardsRoute = (
   dbClient: DbClient,
@@ -50,7 +53,9 @@ export const cardsRoute = (
 
     const updateResult = await dbClient.update(newCard);
     ctx.response.status = Status.OK;
-    ctx.response.body = updateResult.rows[0];
+    const db = updateResult.rows[0];
+    const dto = dbToDto(db);
+    ctx.response.body = dto;
   });
 
   router.post("/", async (ctx) => {
@@ -77,9 +82,10 @@ export const cardsRoute = (
         whenReview: getNow(),
       },
     );
-    const createdCard = insertResult.rows[0];
+    const db = insertResult.rows[0];
     ctx.response.status = Status.Created;
-    ctx.response.body = createdCard;
+    const dto: CardDto = dbToDto(db);
+    ctx.response.body = dto;
   });
 
   router.get("/:id", async (ctx) => {
@@ -96,18 +102,24 @@ export const cardsRoute = (
       ctx.response.status = Status.NotFound;
       return;
     }
-    ctx.response.body = card.rows[0];
+    const db = card.rows[0];
+    const dto: CardDto = dbToDto(db);
+    ctx.response.body = dto;
   });
 
   router.get("/", async (ctx) => {
     const active = ctx.request.url.searchParams.get("active") !== null;
     if (active) {
       const cards = await dbClient.getActiveCards();
-      ctx.response.body = cards.rows;
+      const db: CardDb[] = cards.rows;
+      const dto: CardDto[] = db.map(dbToDto);
+      ctx.response.body = dto;
       return;
     }
     const cards = await dbClient.getAllCards();
-    ctx.response.body = cards.rows;
+    const db = cards.rows;
+    const dto: CardDto[] = db.map(dbToDto);
+    ctx.response.body = dto;
   });
 
   return router;

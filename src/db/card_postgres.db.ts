@@ -1,12 +1,5 @@
 import { Client } from "postgres";
-
-type CardDb = {
-  id: number;
-  question: string;
-  answer: string;
-  whenReview: number;
-  currentFib: number;
-};
+import { CardDb } from "./card_db.ts";
 
 export type DbClient = Awaited<ReturnType<typeof getClient>>;
 
