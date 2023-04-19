@@ -5,6 +5,7 @@ import { Card, cardOne, cardThree, cardTwo } from "./mock_cards.ts";
 import { timeSimulation } from "../src/test/time_simulation.ts";
 import { assertEquals } from "std/testing/asserts.ts";
 import { beforeEach, it } from "std/testing/bdd.ts";
+import { assertObjectMatch } from "https://deno.land/std@0.160.0/testing/asserts.ts";
 
 const deleteCards = async () => {
   const request = await superoak(app);
@@ -24,15 +25,19 @@ it("inserts a card and gets the card", async () => {
     question: cardOne.question,
     answer: cardOne.answer,
   }).expect(201).expect((x) => {
-    assertEquals(x.body.answer, cardOne.answer);
-    assertEquals(x.body.question, cardOne.question);
+    assertObjectMatch(x.body, {
+      question: cardOne.question,
+      answer: cardOne.answer,
+    });
   });
 
   const card = response.body as Card;
   const request2 = await superoak(app);
   await request2.get(`/v2/cards/${card.id}`).expect(200).expect((x) => {
-    assertEquals(x.body.answer, cardOne.answer);
-    assertEquals(x.body.question, cardOne.question);
+    assertObjectMatch(x.body, {
+      question: cardOne.question,
+      answer: cardOne.answer,
+    });
   });
 });
 
